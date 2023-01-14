@@ -51,6 +51,12 @@ t410fzsusgohpsu24w5svz7bupq3n2ttpgzr7s5jap4i
 
 Uses [@glif/filecoin-address](https://www.npmjs.com/package/@glif/filecoin-address) to do the conversion.
 
+## Get an Ethereum address from a Filecoin ID address 
+
+```
+$ npx filecoin-address-tool eth-address-from-id-address f01006
+ff000000000000000000000000000000000003ee
+```
 
 ## License
 
