@@ -60,7 +60,7 @@ $ npx filecoin-address-tool eth-address-from-id-address f01006
 ff000000000000000000000000000000000003ee
 ```
 
-## Generate a Filecoin f1 (SecP256k1) address
+## Generate a Filecoin f1 (Secp256k1) address
 
 ```
 $ npx filecoin-address-tool random-fil-account-f1          
