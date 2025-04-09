@@ -4,22 +4,25 @@ const { randomBytes } = require('crypto')
 const { newDelegatedEthAddress } = require('@glif/filecoin-address')
 const { ethers } = require('ethers')
 const parser = require('yargs-parser')
+const { keyRecover, keyRecoverBLS } = require('@zondax/filecoin-signing-tools')
 
 const argv = parser(
   process.argv.slice(2),
   {
-    boolean: [ 'testnet' ],
+    boolean: ['testnet'],
     configuration: {
       'parse-numbers': false
     }
   }
 )
 
-function usage () {
+function usage() {
   console.error('Usage: filecoin-address-tool delegate-address-from-eth-address [--testnet] <eth-address>')
   console.error('       filecoin-address-tool generate-random-eth-private-key')
   console.error('       filecoin-address-tool eth-address-from-eth-private-key <eth-private-key-hex>')
   console.error('       filecoin-address-tool eth-address-from-id-address <f0 or t0 address>')
+  console.error('       random-fil-account-f1 [--testnet]')
+  console.error('       random-fil-account-f3 [--testnet]')
   process.exit(1)
 }
 
@@ -43,6 +46,29 @@ switch (argv._[0]) {
       process.exit(1)
     }
     console.log('ff' + Number(match[1]).toString(16).padStart(38, '0'))
+    break;
+  case 'random-fil-account-f1':
+    {
+      const privKey = randomBytes(32)
+      const extendedKey = keyRecover(privKey, argv.testnet)
+      console.log('Address:', extendedKey.address)
+      console.log('Private:', extendedKey.private_base64)
+    }
+    break;
+  case 'random-fil-account-f3':
+    {
+      while (true) {
+        const privKey = randomBytes(32)
+        try {
+          const extendedKey = keyRecoverBLS(privKey, argv.testnet)
+          console.log('Address:', extendedKey.address)
+          console.log('Private:', extendedKey.private_base64)
+          break
+        } catch (e) {
+          // retry
+        }
+      }
+    }
     break;
   default:
     usage()

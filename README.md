@@ -13,6 +13,8 @@ Usage: filecoin-address-tool delegate-address-from-eth-address [--testnet] <eth-
        filecoin-address-tool generate-random-eth-private-key
        filecoin-address-tool eth-address-from-eth-private-key <eth-private-key-hex>
        filecoin-address-tool eth-address-from-id-address <f0 or t0 address>
+       random-fil-account-f1 [--testnet]
+       random-fil-account-f3 [--testnet]
 ```
 
 ## Generate a random Ethereum private key
@@ -56,6 +58,22 @@ Uses [@glif/filecoin-address](https://www.npmjs.com/package/@glif/filecoin-addre
 ```
 $ npx filecoin-address-tool eth-address-from-id-address f01006
 ff000000000000000000000000000000000003ee
+```
+
+## Generate a Filecoin f1 (SecP256k1) address
+
+```
+$ npx filecoin-address-tool random-fil-account-f1          
+Address: f1pumynqd34tuosgrkzegyspq4ioc3obbvt2ukgpa
+Private: hWc8bzbbbm8DRC++SoB++oT1pbHY+rrQSdO6iyhfQDE=
+```
+
+## Generate a Filecoin f3 (BLS) address
+
+```
+$ npx filecoin-address-tool random-fil-account-f3 
+Address: f3vgfyaqchm63qxsdbbimm5lcz3ekizhseznufjrkfmmgs5lrsyzq3bnwoinp3kn35dxihk4udkbga5byctbkq
+Private: Qa2Y9tHRe5kqq/pG+wk/P85IJjMK3Lfg0O7hdzfrRD8=
 ```
 
 ## License
